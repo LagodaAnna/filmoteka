@@ -1,0 +1,89 @@
+.header {
+    
+    background-image: url('../images/background-home-tablet.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    width: 100%;
+    height: 215px;
+
+}
+
+.header-nav{
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+
+.header-icon-link{
+  padding-top: 40px;
+}
+
+
+.film-icon {
+ 
+}
+
+.headers-button {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.headers-button__item{
+    position: relative;
+    &:not(:first-child){
+       margin-left: 40px;
+    }   
+}
+
+.headers-button__btn{
+    padding-top: 44px;
+
+    background-color: transparent;
+    border: none;
+    color: #fff;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+}
+
+.current-btn{
+    &::after{
+        content: '';
+        width: 80%;
+        height: 3px;
+        position: absolute;
+        left:10%;
+        bottom: -5%;
+        background-color: #FF6B08;
+  }
+}
+
+.search-form {
+    position: relative;
+    width: 100%;  
+}
+
+.search-input{
+   width: 100%;
+   background-color: transparent;
+   border: none;
+   border-bottom: 1px solid #fff;
+   color: #fff;
+
+   &::placeholder{
+       color: inherit;
+   }
+}
+
+.search-form__icon{
+    position: absolute;
+    top: 12%;
+    right: 2%;
+    fill:#fff;
+}
