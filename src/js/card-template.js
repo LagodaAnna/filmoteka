@@ -1,5 +1,5 @@
 export default function cardTemplate(posterPath, title, arrGenre, releaseDate) {
-  return `<div class="card-container">
+  return `<div class="splide__slide card-container">
       <img src="${posterPath}" alt="${title}" class="film-image" />
       <p class="film-title">${title}</p>
       <p class="film-genre">${[
@@ -7,3 +7,13 @@ export default function cardTemplate(posterPath, title, arrGenre, releaseDate) {
       ]}<span> | </span><span class="film-year">${releaseDate}</span></p>
     </div>`;
 }
+
+// export default function cardTemplate(posterPath, title, arrGenre, releaseDate) {
+//   return `<div class="card-container">
+//       <img src="${posterPath}" alt="${title}" class="film-image" />
+//       <p class="film-title">${title}</p>
+//       <p class="film-genre">${[
+//         ...arrGenre,
+//       ]}<span> | </span><span class="film-year">${releaseDate}</span></p>
+//     </div>`;
+// }

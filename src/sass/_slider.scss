@@ -1,0 +1,22 @@
+.splide{
+  max-width: 100vw;
+}
+
+.splide__slide {
+    max-width: 200px;
+    height: 300px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+// .splide__pagination{
+//    bottom: -1.5em;
+// }
+
+// .splide__pagination__page.is-active{
+//   background-color: #FF6B08;
+// }
+
+.splide__arrow{
+  background-color: #FF6B08;
+}
