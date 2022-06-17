@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page title</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.6/dist/css/splide.min.css"
     />
@@ -16,15 +20,15 @@
 
     <main class="main-content">
       <include src="./partials/slider.html"></include>
-      <div class="container js-films-container"></div>
+
+      <div class="container">
+        <ul class="card-container js-films-container"></ul>
+      </div>
     </main>
 
     <footer class="footer">
       <div class="container"></div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.6/dist/js/splide.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.4.2/dist/js/splide-extension-auto-scroll.min.js"></script>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

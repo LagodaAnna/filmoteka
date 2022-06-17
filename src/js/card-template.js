@@ -1,19 +1,9 @@
 export default function cardTemplate(posterPath, title, arrGenre, releaseDate) {
-  return `<div class="splide__slide card-container">
-      <img src="${posterPath}" alt="${title}" class="film-image" />
+  return `<li class="card-item">
+    <div class="card-image-container"><img src="${posterPath}" alt="${title}" class="film-image" /></div>
       <p class="film-title">${title}</p>
       <p class="film-genre">${[
         ...arrGenre,
       ]}<span> | </span><span class="film-year">${releaseDate}</span></p>
-    </div>`;
+    </li>`;
 }
-
-// export default function cardTemplate(posterPath, title, arrGenre, releaseDate) {
-//   return `<div class="card-container">
-//       <img src="${posterPath}" alt="${title}" class="film-image" />
-//       <p class="film-title">${title}</p>
-//       <p class="film-genre">${[
-//         ...arrGenre,
-//       ]}<span> | </span><span class="film-year">${releaseDate}</span></p>
-//     </div>`;
-// }

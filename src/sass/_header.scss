@@ -1,12 +1,37 @@
 .header {
-    
-    background-image: url('../images/background-home-tablet.jpg');
+    background-color: #000;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left;
+    background-size: contain;
+    background-position: center;
     width: 100%;
-    height: 215px;
+    height: 230px;
 
+    @media screen and (min-width:$tablet){
+        height: 215px;
+    }
+}
+
+.home{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-bg-home-320.jpg');
+    @media screen and (min-width:$tablet) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-bg-home-768.jpg'); 
+        }
+    
+        @media screen and(min-width:$desktop) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-bg-home-1024.jpg');
+        }
+}
+
+.library{
+    background-color: #1d0402;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-bg-library-768.jpg');
+    background-size: cover;
+    background-position: bottom;
+    
+        @media screen and(min-width:$desktop) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-bg-library-1024.jpg');
+            background-size: contain;
+        }
 }
 
 .header-nav{
@@ -18,12 +43,27 @@
 
 .header-icon-link{
   padding-top: 40px;
+  display: flex;
+  align-items: center;
 }
 
 
 .film-icon {
- 
+  margin-right: 10px;
 }
+
+.header-logo {
+opacity: 0;
+
+    @media screen and (min-width:$tablet){
+        opacity: 1;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.17px;
+         color: #fff;
+    }
+}
+
 
 .headers-button {
     display: flex;
@@ -40,6 +80,8 @@
 
 .headers-button__btn{
     padding-top: 44px;
+    padding-left: 0;
+    padding-right: 0;
 
     background-color: transparent;
     border: none;
@@ -55,10 +97,10 @@
 .current-btn{
     &::after{
         content: '';
-        width: 80%;
+        width: 100%;
         height: 3px;
         position: absolute;
-        left:10%;
+        left: 0;
         bottom: -5%;
         background-color: #FF6B08;
   }
@@ -66,13 +108,16 @@
 
 .search-form {
     position: relative;
+    margin: 0 auto;
     width: 100%;  
+    max-width: 336px;
 }
 
 .search-input{
    width: 100%;
    background-color: transparent;
    border: none;
+   outline: none;
    border-bottom: 1px solid #fff;
    color: #fff;
 
@@ -86,4 +131,29 @@
     top: 12%;
     right: 2%;
     fill:#fff;
+}
+
+.header__library-btn-container{
+   width: fit-content;
+   margin: 0 auto;
+}
+
+.header__watched-btn{
+    @include button(#FF6B01, #FF6B01);
+    margin-right: 20px;
+    @media screen and (min-width:$tablet) {
+        width: 150px;
+    }
+}
+
+.header__queue-btn{
+    @include button(transparent, #fff);
+    @media screen and (min-width:$tablet) {
+        width: 150px;
+    }
+}
+
+.header__watched-btn:hover,
+.header__queue-btn:hover{
+  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
 }

@@ -1,17 +1,20 @@
-<header class="header">
+<header class="header home">
   <div class="container">
     <nav class="header-nav">
-      <a href="#" class="header-icon-link">
+      <a href="#" class="header-icon-link js-header-logo">
         <svg class="film-icon" width="24" height="24">
           <use href="./images/symbol-defs.svg#icon-film-logo"></use>
         </svg>
+        <span class="header-logo">Filmoteka</span>
       </a>
       <ul class="headers-button">
         <li class="headers-button__item">
-          <button class="headers-button__btn current-btn">Home</button>
+          <button class="headers-button__btn current-btn js-home-btn">
+            Home
+          </button>
         </li>
         <li class="headers-button__item">
-          <button class="headers-button__btn">my library</button>
+          <button class="headers-button__btn js-library-btn">my library</button>
         </li>
       </ul>
     </nav>
@@ -27,5 +30,11 @@
         <use href="./images/symbol-defs.svg#icon-search"></use>
       </svg>
     </form>
+    <div
+      class="header__library-btn-container visually-hidden js-library-buttons"
+    >
+      <button class="header__watched-btn">Watched</button>
+      <button class="header__queue-btn">Queue</button>
+    </div>
   </div>
 </header>
