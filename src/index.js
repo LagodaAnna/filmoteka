@@ -1,8 +1,11 @@
 import MovieAPIService from './js/fetch-films';
+import StorageAPI from './js/library';
 import GalleryMarkup from './js/gallery-markup';
 import galleryItemTpl from './js/card-template';
 import { splide, spliderCardTemplate } from './js/splider';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+import { fillMovieDetailsToModal } from './js/modal';
+const bodyScrollLock = require('body-scroll-lock');
 
 const root = document.querySelector('.js-films-container');
 const spliderList = document.querySelector('.splide__list');
@@ -12,10 +15,22 @@ const homeBtn = document.querySelector('.js-home-btn');
 const headerLogo = document.querySelector('.js-header-logo');
 const header = document.querySelector('.header');
 const libraryBtnContainer = document.querySelector('.js-library-buttons');
+const backdrop = document.querySelector('.backdrop');
+const modalCloseBtn = document.querySelector('.modal__close-btn');
+
+const movieAPI = new MovieAPIService();
+const storageAPI = new StorageAPI();
+const spliderMarkup = new GalleryMarkup(spliderList);
+const homePageMarkup = new GalleryMarkup(root);
 
 libraryBtn.addEventListener('click', onLibraryBtnClick);
 homeBtn.addEventListener('click', onHomeBtnClick);
 headerLogo.addEventListener('click', onHomeBtnClick);
+form.addEventListener('submit', onSubmit);
+root.addEventListener('click', onCardClick);
+spliderList.addEventListener('click', onCardClick);
+modalCloseBtn.addEventListener('click', modalClose);
+backdrop.addEventListener('click', onBackDropClick);
 
 function onLibraryBtnClick() {
   form.classList.add('visually-hidden');
@@ -35,12 +50,8 @@ function onHomeBtnClick() {
   libraryBtnContainer.classList.add('visually-hidden');
 }
 
-const movieAPI = new MovieAPIService();
-const spliderMarkup = new GalleryMarkup(spliderList);
-const homePageMarkup = new GalleryMarkup(root);
-
 movieAPI
-  .fetchMostPopularFilms()
+  .getMostPopularFilms()
   .then(data => {
     spliderMarkup.data = data;
     spliderMarkup.template = spliderCardTemplate;
@@ -50,7 +61,7 @@ movieAPI
   .catch(error => console.log(error));
 
 movieAPI
-  .fetchMostPopularFilms()
+  .getMostPopularFilms()
   .then(data => {
     homePageMarkup.data = data;
     homePageMarkup.template = galleryItemTpl;
@@ -58,43 +69,44 @@ movieAPI
   })
   .catch(error => console.log(error));
 
-// function onSubmit(evt) {
-//   evt.preventDefault();
-//   movieAPI.query = evt.target.elements.searchInput.value;
-//   movieAPI.searchFilmByTitle().then(data => {
-//     galleryMarkup.data = data;
-//     galleryMarkup.createPostersMarkup();
-//     // slider();
-//   });
-// }
+function onSubmit(evt) {
+  evt.preventDefault();
+  movieAPI.query = evt.target.elements.searchInput.value;
+  movieAPI
+    .getFilmsByTitle()
+    .then(data => {
+      homePageMarkup.data = data;
+      homePageMarkup.createPostersMarkup();
+    })
+    .catch(error => console.log(error));
+}
 
-// form.addEventListener('submit', onSubmit);
+function onCardClick(evt) {
+  if (!!evt.target.closest('li')) {
+    const id = evt.target.closest('li').dataset.id;
+    fillMovieDetailsToModal(id);
+    backdrop.classList.remove('is-hidden');
+    bodyScrollLock.disableBodyScroll(document.body);
+    splide.Components.AutoScroll.pause();
+    storageAPI.addToWatched(id);
+  }
+}
+
+function modalClose() {
+  backdrop.classList.add('is-hidden');
+  bodyScrollLock.enableBodyScroll(document.body);
+  splide.Components.AutoScroll.play();
+}
+
+function onBackDropClick(evt) {
+  if (evt.target.classList.contains('backdrop')) {
+    modalClose();
+  }
+}
+
+// movieAPI.fetchMostPopularFilms().then(res => console.log(res));
 
 // document.addEventListener('DOMContentLoaded', () => {
-//   const splide = new Splide('.splide', {
-//     type: 'loop',
-//     drag: 'free',
-//     focus: 'center',
-//     perPage: 3,
-//     autoScroll: {
-//       speed: 2,
-//     },
-//   });
 
-//   splide.mount(window.splide.Extensions);
-// });
-
-// function slider() {
-//   const splide = new Splide('.splide', {
-//     type: 'loop',
-//     drag: 'free',
-//     focus: 'center',
-//     pagination: false,
-//     perPage: 3,
-//     autoScroll: {
-//       speed: 1,
-//     },
-//   });
-
-//   splide.mount(window.splide.Extensions);
-// }
+// movieAPI.fetchFilmDetails(615469).then(console.log);
+//Angel the Kickboxer
