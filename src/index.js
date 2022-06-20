@@ -88,7 +88,6 @@ function onCardClick(evt) {
     backdrop.classList.remove('is-hidden');
     bodyScrollLock.disableBodyScroll(document.body);
     splide.Components.AutoScroll.pause();
-    storageAPI.addToWatched(id);
   }
 }
 
@@ -103,6 +102,12 @@ function onBackDropClick(evt) {
     modalClose();
   }
 }
+
+// storageAPI.getFromWatched();
+// storageAPI.getFilmsId();
+// console.log(storageAPI.getFilmsId());
+// storageAPI.deleteFromWatched(615469);
+// console.log(storageAPI.getFilmsId());
 
 // movieAPI.fetchMostPopularFilms().then(res => console.log(res));
 

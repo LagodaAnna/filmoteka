@@ -101,10 +101,12 @@
 }
 
 .modal-about-text{
+    max-height: 200px;
     margin-bottom: 20px;
     font-weight: 500;
     font-size: 12px;
     line-height: 1.7;
+    overflow-y: auto;
 }
 
 .modal__button-watched,

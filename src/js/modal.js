@@ -1,15 +1,30 @@
 import MovieAPIService from './fetch-films';
+import StorageAPI from './library';
 
 const movieAPI = new MovieAPIService();
+const storageAPI = new StorageAPI();
 
 export function fillMovieDetailsToModal(id) {
   movieAPI
     .fetchFilmDetails(id)
     .then(data => {
       const modalMarkup = createMovieDetailsMarkup(data);
-      document.querySelector('.modal__movie-container').innerHTML = modalMarkup;
+      document.querySelector('.modal__container').innerHTML = modalMarkup;
+      const addToWatchedBtn = document.querySelector('.modal__button-watched');
+      addToWatchedBtn.addEventListener('click', onAddToWatchedBtnClick);
     })
     .catch(error => console.log(error));
+}
+
+function onAddToWatchedBtnClick(evt) {
+  console.log(evt.target.closest('.modal__movie-container'));
+  const movieId = evt.target.closest('.modal__movie-container').dataset.id;
+  console.log(movieId);
+  storageAPI.addToWatched(movieId);
+  console.log(storageAPI.getFilmsId());
+  // const id = evt.target.closest('.modal__movie-container').dataset.id;
+  // document.querySelector(`[data-id="${id}"]`);
+  // console.log(document.querySelectorAll(`[data-id="${id}"]`));
 }
 
 function createMovieDetailsMarkup(movie) {
@@ -17,7 +32,8 @@ function createMovieDetailsMarkup(movie) {
     movie.genres.length > 0
       ? movie.genres.map(item => item.name).join(', ')
       : 'Unknown';
-  return `<div class="modal__movie-poster-container">
+  return ` <div class="modal__movie-container" data-id="${movie.id}">
+  <div class="modal__movie-poster-container">
         <img
           src="${movie.posterURI}"
           alt="${movie.original_title}"
@@ -58,5 +74,6 @@ function createMovieDetailsMarkup(movie) {
           <button class="modal__button-watched">add to watched</button>
           <button class="modal__button-queue">add to queue</button>
         </div>
+      </div>
       </div>`;
 }
